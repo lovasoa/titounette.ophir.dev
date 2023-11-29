@@ -10,6 +10,8 @@ where not exists (
 insert into user_account (username, password_hash)
 select :Username, sqlpage.hash_password(:Password)
 where :Username is not null and :Password is not null and :Password = :Password_confirm
+on conflict (username) update
+    password_hash = sqlpage.hash_password(:Password)
 returning
     'redirect' as component,
     '/' as link;
