@@ -11,7 +11,7 @@ select 'text' as component,
 select 'card' as component;
 with products_info as (
         select *, 
-        (select name from reservation where product_id = products.id and canceled_at is null) as reserved_by,
+        (select name from reservation where product_id = products.id and canceled_at is null order by created_at limit 1) as reserved_by,
         id = $created_id::int as is_created
         from products
 )
