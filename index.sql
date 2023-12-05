@@ -3,7 +3,8 @@ select 'shell' as component,
     (
         case when sqlpage.cookie('session_token') is null then 'login'
         else 'logout' end
-    ) as menu_item;
+    ) as menu_item,
+    'Fait avec [SQLPage](https://sql.ophir.dev) | [Code source](https://github.com/lovasoa/titounette.ophir.dev)' as footer;
 
 select 'text' as component,
     sqlpage.read_file_as_text('welcome.md') as contents_md;
